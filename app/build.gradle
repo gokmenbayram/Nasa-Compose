@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
 }
 
+apply from: 'dependencies.gradle'
+
 android {
     compileSdk 31
 
@@ -21,6 +23,8 @@ android {
 
     buildTypes {
         release {
+            buildConfigField 'String', "BASE_API_URL" , "\"https://api.nasa.gov/mars-photos/api/v1/\""
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -62,4 +66,24 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+
+
+    implementation retrofitDependencies.retrofit
+    implementation retrofitDependencies.retrofitConvGson
+
+    implementation navigationComposeDependency
+
+    implementation coroutineDependencies.coroutineCore
+    implementation coroutineDependencies.coroutineAndroid
+
+    implementation viewModelDependency
+
+    implementation glideDependencies.glide
+    implementation glideDependencies.glide_annotation
+
+    implementation hiltDependencies.hilt
+    implementation hiltDependencies.hilt_compiler
+
+    implementation gsonDependency
+
 }
