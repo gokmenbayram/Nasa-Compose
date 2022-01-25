@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 apply from: 'dependencies.gradle'
@@ -22,8 +24,16 @@ android {
     }
 
     buildTypes {
+
+        debug {
+            buildConfigField "String", "API_KEY", '"F9pnzGGtTX49Rhu0fMxOUyUsEedBWRISdQAEoDez"'
+            buildConfigField "String", "BASE_API_URL", '"https://api.nasa.gov/mars-photos/api/v1/"'
+        }
+
         release {
-            buildConfigField 'String', "BASE_API_URL" , "\"https://api.nasa.gov/mars-photos/api/v1/\""
+
+            buildConfigField "String", "API_KEY", '"F9pnzGGtTX49Rhu0fMxOUyUsEedBWRISdQAEoDez"'
+            buildConfigField "String", "BASE_API_URL", '"https://api.nasa.gov/mars-photos/api/v1/"'
 
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -82,8 +92,11 @@ dependencies {
     implementation glideDependencies.glide_annotation
 
     implementation hiltDependencies.hilt
-    implementation hiltDependencies.hilt_compiler
+    implementation hiltDependencies.hilt_navigation_compose
+    kapt hiltDependencies.hilt_compiler
+
 
     implementation gsonDependency
+
 
 }

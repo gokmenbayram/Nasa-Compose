@@ -21,6 +21,9 @@ import com.nasacompose.R
 import com.nasacompose.presentation.ui.favorite.FavoriteScreen
 import com.nasacompose.presentation.ui.home.HomeScreen
 import androidx.compose.material.BottomNavigation
+import com.nasacompose.presentation.ui.curiosity.CuriosityScreen
+import com.nasacompose.presentation.ui.opportunity.OpportunityScreen
+import com.nasacompose.presentation.ui.spirit.SpiritScreen
 
 @Composable
 fun MainScreenView() {
@@ -38,7 +41,10 @@ fun BottomNavigation(navController: NavController) {
 
     val bottomNavItems = listOf(
         BottomNavItem.Home,
-        BottomNavItem.Favorite
+        BottomNavItem.Favorite,
+        BottomNavItem.Curiosity,
+        BottomNavItem.Opportunity,
+        BottomNavItem.Spirit
     )
 
     BottomNavigation(
@@ -90,6 +96,15 @@ fun NavigationGraph(navHostController: NavHostController) {
 
         composable(BottomNavItem.Favorite.screen_route) {
             FavoriteScreen()
+        }
+        composable(BottomNavItem.Curiosity.screen_route) {
+            CuriosityScreen()
+        }
+        composable(BottomNavItem.Opportunity.screen_route) {
+            OpportunityScreen()
+        }
+        composable(BottomNavItem.Spirit.screen_route) {
+            SpiritScreen()
         }
     }
 }

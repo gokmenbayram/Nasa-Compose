@@ -34,13 +34,15 @@ ext {
 
     // ----- HILT -----
     hiltVersion = "2.38.1"
+    hiltNavComposeVersion = "1.0.0-beta01"
     hiltDependencies = [
             hilt : "com.google.dagger:hilt-android:${hiltVersion}",
-            hilt_compiler : "com.google.dagger:hilt-compiler:${hiltVersion}"
+            hilt_compiler : "com.google.dagger:hilt-compiler:${hiltVersion}",
+            hilt_navigation_compose : "androidx.hilt:hilt-navigation-compose:${hiltNavComposeVersion}"
     ]
 
 
     // ----- GSON -------
-    gsonVersion = "2.8.6"
+    gsonVersion = "2.8.9"
     gsonDependency = "com.google.code.gson:gson:${gsonVersion}"
 }
