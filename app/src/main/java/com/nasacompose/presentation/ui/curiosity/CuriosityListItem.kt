@@ -1,6 +1,5 @@
 package com.nasacompose.presentation.ui.curiosity
 
-import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
@@ -14,7 +13,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.nasacompose.data.model.response.PhotoDetailResponseModel
+import com.nasacompose.data.model.ui.RoverCameraUiState
 import com.nasacompose.data.model.ui.RoverDetailUiState
+import com.nasacompose.presentation.ui.custom.CustomDialogUI
 import com.nasacompose.presentation.ui.custom.LoadRoverPhoto
 import com.nasacompose.presentation.ui.custom.LoadRoverText
 
@@ -23,14 +24,14 @@ fun CuriosityListItem(
     curiosity: PhotoDetailResponseModel,
     clickedItem: () -> Unit) {
 
-    //val openDialog = remember { mutableStateOf(true)}
+    val openDialog = remember { mutableStateOf(false)}
 
     Card(
         modifier = Modifier
-            .padding(horizontal = 8.dp, vertical = 8.dp)
+            .padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
             .fillMaxWidth()
             .clickable {
-                clickedItem()
+                openDialog.value = true
             },
         elevation = 2.dp,
         backgroundColor = Color.White,
@@ -46,6 +47,21 @@ fun CuriosityListItem(
                     curiosity.rover.status
                 )
             )
+        }
+    }
+
+    if (openDialog.value) {
+        Dialog(onDismissRequest = { openDialog.value = false}) {
+            CustomDialogUI(
+                openDialogCustom = openDialog,
+                camera = RoverCameraUiState(
+                curiosity.camera.id,
+                curiosity.img_src,
+                curiosity.camera.name,
+                curiosity.camera.rover_id,
+                curiosity.camera.full_name
+
+            ))
         }
     }
 }

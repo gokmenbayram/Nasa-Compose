@@ -40,15 +40,14 @@ fun MainScreenView() {
 fun BottomNavigation(navController: NavController) {
 
     val bottomNavItems = listOf(
-        BottomNavItem.Home,
-        BottomNavItem.Favorite,
         BottomNavItem.Curiosity,
         BottomNavItem.Opportunity,
-        BottomNavItem.Spirit
+        BottomNavItem.Spirit,
+        BottomNavItem.Favorite
     )
 
     BottomNavigation(
-        backgroundColor = colorResource(id = R.color.teal_200),
+        backgroundColor = colorResource(id = R.color.gray),
         contentColor = Color.Black
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -88,15 +87,8 @@ fun BottomNavigation(navController: NavController) {
 fun NavigationGraph(navHostController: NavHostController) {
     NavHost(
         navController = navHostController,
-        startDestination = BottomNavItem.Home.screen_route
+        startDestination = BottomNavItem.Curiosity.screen_route
     ) {
-        composable(BottomNavItem.Home.screen_route) {
-            HomeScreen()
-        }
-
-        composable(BottomNavItem.Favorite.screen_route) {
-            FavoriteScreen()
-        }
         composable(BottomNavItem.Curiosity.screen_route) {
             CuriosityScreen()
         }
@@ -105,6 +97,9 @@ fun NavigationGraph(navHostController: NavHostController) {
         }
         composable(BottomNavItem.Spirit.screen_route) {
             SpiritScreen()
+        }
+        composable(BottomNavItem.Favorite.screen_route) {
+            FavoriteScreen()
         }
     }
 }
