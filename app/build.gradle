@@ -95,8 +95,9 @@ dependencies {
     implementation hiltDependencies.hilt_navigation_compose
     kapt hiltDependencies.hilt_compiler
 
-
     implementation gsonDependency
 
+    implementation liveDataDependency
 
+    implementation coilDependency
 }

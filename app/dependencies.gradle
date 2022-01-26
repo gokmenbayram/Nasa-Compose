@@ -45,4 +45,12 @@ ext {
     // ----- GSON -------
     gsonVersion = "2.8.9"
     gsonDependency = "com.google.code.gson:gson:${gsonVersion}"
+
+    // ----- LIVE DATA COMPOSE -------
+    liveDataVersion = "1.0.5"
+    liveDataDependency = "androidx.compose.runtime:runtime-livedata:$liveDataVersion"
+
+    // ----- COIL COMPOSE -------
+    coilVersion = "1.4.0"
+    coilDependency = "io.coil-kt:coil-compose:$coilVersion"
 }

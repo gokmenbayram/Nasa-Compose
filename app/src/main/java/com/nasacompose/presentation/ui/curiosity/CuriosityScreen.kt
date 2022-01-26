@@ -1,23 +1,19 @@
 package com.nasacompose.presentation.ui.curiosity
 
 import android.util.Log
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.nasacompose.R
+import com.nasacompose.data.model.response.PhotoDetailResponseModel
+import com.nasacompose.presentation.ui.loading.LoadingComponent
 import com.nasacompose.presentation.viewmodel.curiosity.CuriosityViewModel
+
 
 
 @Preview
@@ -26,23 +22,35 @@ fun CuriosityScreen(
     viewModel: CuriosityViewModel = hiltViewModel()
 ) {
 
+    var count = 0
+
     viewModel.fetchCuriosityPhotos()
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(colorResource(id = R.color.teal_700))
-            .wrapContentSize(Alignment.Center)
-    ) {
-        Text(
-            text = "Curiosity Screen",
-            fontWeight = FontWeight.Bold,
-            color = Color.White,
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            textAlign = TextAlign.Center,
-            fontSize = 20.sp
+    if (count == 0) {
+        val curiosityPhotos by viewModel.curiosityPhotos.observeAsState(initial = emptyList())
+
+        curiosityPhotos?.let {
+            if (curiosityPhotos.isNotEmpty()) {
+                CuriosityListComponent(curiosityPhotos)
+                Log.i("DataControl", "Size: ${curiosityPhotos.size}")
+            }
+        } ?: LoadingComponent()
+
+        count += 1
+    }
+}
+
+
+@Composable
+fun CuriosityListComponent(curiosityList: List<PhotoDetailResponseModel>) {
+    LazyColumn(contentPadding = PaddingValues(horizontal = 16.dp, vertical = 16.dp)) {
+        items(
+            items = curiosityList,
+            itemContent = {
+                CuriosityListItem(curiosity = it) {
+
+                }
+            }
         )
     }
-
-    Log.i("ScreenCont", "CuriosityScreen")
 }
