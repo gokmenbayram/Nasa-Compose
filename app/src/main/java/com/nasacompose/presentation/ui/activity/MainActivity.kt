@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.nasacompose.presentation.ui.main.MainScreenView
+import com.nasacompose.presentation.ui.main.MainScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -15,7 +15,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            MainScreenView()
+            MainScreen()
         }
     }
 }
@@ -23,5 +23,5 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun BottomNavigationPreview() {
-    MainScreenView()
+    MainScreen()
 }

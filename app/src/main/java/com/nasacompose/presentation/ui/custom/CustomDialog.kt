@@ -22,6 +22,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import coil.compose.rememberImagePainter
 import com.nasacompose.data.model.ui.RoverCameraUiState
+import com.nasacompose.presentation.ui.theme.Gray
 import com.nasacompose.presentation.ui.theme.Purple500
 
 @Composable
@@ -72,7 +73,7 @@ fun CustomDialogUI(modifier: Modifier = Modifier, openDialogCustom: MutableState
                 Modifier
                     .fillMaxWidth()
                     .padding(top = 10.dp)
-                    .background(Purple500),
+                    .background(Gray),
                 horizontalArrangement = Arrangement.SpaceAround) {
                 TextButton(onClick = {
                     openDialogCustom.value = false
@@ -80,7 +81,7 @@ fun CustomDialogUI(modifier: Modifier = Modifier, openDialogCustom: MutableState
                     Text(
                         "Kapat",
                         fontWeight = FontWeight.ExtraBold,
-                        color = Color.White,
+                        color = Color.Black,
                         modifier = Modifier.padding(top = 5.dp, bottom = 5.dp)
                     )
                 }

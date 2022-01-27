@@ -6,9 +6,9 @@ import com.nasacompose.data.model.response.PhotoResponseModel
 import com.nasacompose.network.service.NasaService
 import javax.inject.Inject
 
-class RemoteDataSource @Inject constructor(
+class MarsRemoteDataSource @Inject constructor(
     private val remote: NasaService
-): RemoteDataSourceImpl {
+): MarsRemoteDataSourceImpl {
 
     override suspend fun fetchCuriosityPhotos(): Resource<PhotoResponseModel> {
         return getResult {

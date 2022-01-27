@@ -4,9 +4,9 @@ import com.nasacompose.base.utils.Resource
 import com.nasacompose.data.model.response.PhotoResponseModel
 import kotlinx.coroutines.flow.Flow
 
-interface MarsRoverPhotoRepositoryImpl {
+interface MarsRepositoryImpl {
 
-    suspend fun fetchCuriosityPhotos(): Flow<Resource<PhotoResponseModel>>
+    fun fetchCuriosityPhotos(): Flow<Resource<PhotoResponseModel>>
     suspend fun fetchOpportunityPhotos(): Flow<Resource<PhotoResponseModel>>
     suspend fun fetchSpiritPhotos(): Flow<Resource<PhotoResponseModel>>
 }

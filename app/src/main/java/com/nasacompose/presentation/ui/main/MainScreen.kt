@@ -1,5 +1,8 @@
 package com.nasacompose.presentation.ui.main
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
@@ -19,19 +22,21 @@ import androidx.navigation.compose.rememberNavController
 import com.nasacompose.BottomNavItem
 import com.nasacompose.R
 import com.nasacompose.presentation.ui.favorite.FavoriteScreen
-import com.nasacompose.presentation.ui.home.HomeScreen
 import androidx.compose.material.BottomNavigation
+import androidx.compose.ui.Modifier
 import com.nasacompose.presentation.ui.curiosity.CuriosityScreen
 import com.nasacompose.presentation.ui.opportunity.OpportunityScreen
 import com.nasacompose.presentation.ui.spirit.SpiritScreen
 
 @Composable
-fun MainScreenView() {
+fun MainScreen() {
     val navController = rememberNavController()
     Scaffold(
         bottomBar = { BottomNavigation(navController = navController) }
     ) {
-        NavigationGraph(navHostController = navController)
+        Box(modifier = Modifier.padding(it)) {
+            NavigationGraph(navHostController = navController)
+        }
     }
 }
 
@@ -62,7 +67,7 @@ fun BottomNavigation(navController: NavController) {
                         fontSize = 9.sp
                     )
                 },
-                selectedContentColor = Color.Black,
+              //  selectedContentColor = Color.Black,
                 unselectedContentColor = Color.Black.copy(0.4f),
                 alwaysShowLabel = true,
                 selected = currentRoute == item.screen_route,
