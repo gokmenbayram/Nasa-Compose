@@ -2,28 +2,25 @@ package com.nasacompose.presentation.ui.custom
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import coil.compose.rememberImagePainter
+import com.nasacompose.data.model.ui.RoverCamera
 import com.nasacompose.data.model.ui.RoverCameraUiState
 import com.nasacompose.presentation.ui.theme.Gray
-import com.nasacompose.presentation.ui.theme.Purple500
 
 @Composable
 fun CustomDialogUI(modifier: Modifier = Modifier, openDialogCustom: MutableState<Boolean>, camera: RoverCameraUiState){
@@ -86,6 +83,39 @@ fun CustomDialogUI(modifier: Modifier = Modifier, openDialogCustom: MutableState
                     )
                 }
             }
+        }
+    }
+}
+
+
+
+@Composable
+fun FilterDialog(
+    openFilterDialog: MutableState<Boolean>,
+    cameraSelected: (String) -> Unit
+) {
+
+    var selected by remember { mutableStateOf(RoverCamera.FHAZ.filterName) }
+
+    Card(
+        shape = RoundedCornerShape(10.dp),
+        modifier = Modifier.padding(10.dp,5.dp,10.dp,10.dp).height(75.dp),
+        elevation = 8.dp
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.White)
+        ) {
+            RadioButton(selected = selected == RoverCamera.FHAZ.filterName, onClick = {
+                cameraSelected(selected)
+            })
+            Text(
+                text = RoverCamera.FHAZ.filterName,
+                modifier = Modifier.clickable(onClick = {
+                    selected = RoverCamera.FHAZ.filterName
+                }).padding(start = 4.dp, top = 2.dp)
+            )
         }
     }
 }

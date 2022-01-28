@@ -1,11 +1,9 @@
 package com.nasacompose.presentation.ui.curiosity
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -17,11 +15,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.nasacompose.R
-import com.nasacompose.data.model.response.PhotoDetailResponseModel
+import com.nasacompose.data.model.response.RoverInfoDetailResponseModel
+import com.nasacompose.data.model.ui.RoverCameraUiState
 import com.nasacompose.data.model.ui.RoverInfoUiState
 import com.nasacompose.presentation.ui.custom.*
 import com.nasacompose.presentation.viewmodel.curiosity.CuriosityViewModel
@@ -32,16 +33,60 @@ fun CuriosityScreen(
     viewModel: CuriosityViewModel = hiltViewModel()
 ) {
 
-    val lazyCuriosityRoverInfo = viewModel.fetchCuriosityRoverInfo().collectAsLazyPagingItems()
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.End
+    ) {
+        CuriosityRoverFilter()
+        CuriosityRoverInfoList(curiosityRoverInfoList = viewModel.curiosityRoverInfoList.collectAsLazyPagingItems())
+    }
+}
 
+@Composable
+fun CuriosityRoverFilter() {
+
+    var openFilterDialog = remember { mutableStateOf(false)}
+
+    Image(
+        painter = painterResource(R.drawable.ic_filter),
+        contentDescription = null,
+        contentScale = ContentScale.Crop,
+        modifier = Modifier
+            .size(25.dp)
+            .padding(top = 5.dp)
+            .clip(RoundedCornerShape(corner = CornerSize(13.dp)))
+            .clickable {
+                openFilterDialog.value = true
+            }
+    )
+
+    if (openFilterDialog.value) {
+        Dialog(onDismissRequest = { openFilterDialog.value = false}) {
+            FilterDialog(
+                openFilterDialog = openFilterDialog,
+                cameraSelected = {
+                    Log.i("Selekted", "$it")
+                })
+        }
+    }
+}
+
+@Composable
+fun CuriosityRoverInfoList(curiosityRoverInfoList: LazyPagingItems<RoverInfoDetailResponseModel>) {
     LazyColumn {
-        items(lazyCuriosityRoverInfo.itemCount) { index ->
-            lazyCuriosityRoverInfo[index]?.let {
-                CuriosityRoverInfoItem(it)
+        items(curiosityRoverInfoList.itemCount) { index ->
+            curiosityRoverInfoList[index]?.let {
+                RoverListItem(
+                    RoverInfoUiState(
+                        camera = it.camera,
+                        imageUrl = it.img_src,
+                        rover = it.rover
+                    )
+                )
             }
         }
 
-        lazyCuriosityRoverInfo.apply {
+        curiosityRoverInfoList.apply {
             when {
                 loadState.refresh is LoadState.Loading -> { // Data is loaded for the first time
                     item {
@@ -54,7 +99,7 @@ fun CuriosityScreen(
                     }
                 }
                 loadState.refresh is LoadState.Error -> {
-                    val e = lazyCuriosityRoverInfo.loadState.refresh as LoadState.Error
+                    val e = curiosityRoverInfoList.loadState.refresh as LoadState.Error
                     item {
                         ErrorItem(
                             message = e.error.localizedMessage!!,
@@ -65,35 +110,5 @@ fun CuriosityScreen(
                 }
             }
         }
-    }
-}
-
-@Composable
-fun CuriosityRoverInfoItem(item: PhotoDetailResponseModel) {
-
-    val openBottomSheet = remember { mutableStateOf(false) }
-
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.End,
-    ) {
-        Image(
-            painter = painterResource(R.drawable.ic_filter),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .size(25.dp)
-                .padding(top = 5.dp)
-                .clip(RoundedCornerShape(corner = CornerSize(13.dp)))
-                .clickable {
-                     openBottomSheet.value = true
-                }
-        )
-
-        RoverListItem(RoverInfoUiState(
-            camera = item.camera,
-            imageUrl = item.img_src,
-            rover = item.rover
-        ))
     }
 }

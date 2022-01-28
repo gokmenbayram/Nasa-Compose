@@ -1,9 +1,11 @@
 package com.nasacompose.data.datasource.remote
 
-import com.nasacompose.base.utils.Resource
-import com.nasacompose.data.model.response.PhotoResponseModel
+import com.nasacompose.data.model.response.RoverInfoResponseModel
+import retrofit2.Response
 
 interface MarsRemoteDataSourceImpl {
 
-
+    suspend fun fetchCuriosityInfo(page: Int): Response<RoverInfoResponseModel>
+    suspend fun fetchOpportunityInfo(page: Int): Response<RoverInfoResponseModel>
+    suspend fun fetchSpiritInfo(page: Int): Response<RoverInfoResponseModel>
 }

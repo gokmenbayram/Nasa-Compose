@@ -1,24 +1,28 @@
 package com.nasacompose.presentation.viewmodel.spirit
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.nasacompose.base.viewmodel.BaseViewModel
-import com.nasacompose.data.model.response.PhotoDetailResponseModel
-import com.nasacompose.data.repository.MarsRepository
+import com.nasacompose.data.datasource.remote.MarsRemoteDataSource
+import com.nasacompose.data.model.response.RoverInfoDetailResponseModel
+import com.nasacompose.data.repository.CuriosityRoverRepository
+import com.nasacompose.data.repository.SpiritRoverRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @HiltViewModel
 class SpiritViewModel @Inject constructor(
-    private val marsRepository: MarsRepository
+    private val remote: MarsRemoteDataSource
 ): BaseViewModel() {
 
-    private val _spiritInfo = MutableLiveData<ArrayList<PhotoDetailResponseModel>>()
-    val spiritInfo: LiveData<ArrayList<PhotoDetailResponseModel>> get() = _spiritInfo
+    val spiritRoverInfoList: Flow<PagingData<RoverInfoDetailResponseModel>> = Pager(
+        PagingConfig(
+            pageSize = 25
+        )
+    ) {
+        SpiritRoverRepository(remote)
+    }.flow
 
 }

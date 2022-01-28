@@ -1,6 +1,6 @@
 package com.nasacompose.data.model.response
 
-data class PhotoDetailResponseModel(
+data class RoverInfoDetailResponseModel(
     val id: Int,
     val sol: Int,
     val camera: CameraResponseModel,
