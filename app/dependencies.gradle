@@ -9,8 +9,6 @@ ext {
     ]
 
     // ----- NAVIGATION COMPOSE -------
-    navigationComposeVersion = "2.4.0-beta02"
-    navigationComposeDependency = "androidx.navigation:navigation-compose:$navigationComposeVersion"
 
 
     // ----- COROUTINE -------
@@ -46,11 +44,16 @@ ext {
     gsonVersion = "2.8.9"
     gsonDependency = "com.google.code.gson:gson:${gsonVersion}"
 
-    // ----- LIVE DATA COMPOSE -------
-    liveDataVersion = "1.0.5"
-    liveDataDependency = "androidx.compose.runtime:runtime-livedata:$liveDataVersion"
-
-    // ----- COIL COMPOSE -------
+    // ----- COMPOSE -------
     coilVersion = "1.4.0"
-    coilDependency = "io.coil-kt:coil-compose:$coilVersion"
+    pagingVersion = "1.0.0-alpha14"
+    liveDataVersion = "1.0.5"
+    navigationComposeVersion = "2.4.0-beta02"
+
+    composeDependencies = [
+            paging : "androidx.paging:paging-compose:$pagingVersion",
+            coil : "io.coil-kt:coil-compose:$coilVersion",
+            live_data : "androidx.compose.runtime:runtime-livedata:$liveDataVersion",
+            navigation_compose : "androidx.navigation:navigation-compose:$navigationComposeVersion"
+    ]
 }

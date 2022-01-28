@@ -21,13 +21,4 @@ class SpiritViewModel @Inject constructor(
     private val _spiritInfo = MutableLiveData<ArrayList<PhotoDetailResponseModel>>()
     val spiritInfo: LiveData<ArrayList<PhotoDetailResponseModel>> get() = _spiritInfo
 
-    fun fetchSpiritInfo() {
-        viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                marsRepository.fetchSpiritPhotos().collect {
-                    _spiritInfo.postValue(it.data?.photos)
-                }
-            }
-        }
-    }
 }

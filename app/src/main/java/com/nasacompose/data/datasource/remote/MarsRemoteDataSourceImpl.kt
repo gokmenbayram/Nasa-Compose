@@ -5,8 +5,5 @@ import com.nasacompose.data.model.response.PhotoResponseModel
 
 interface MarsRemoteDataSourceImpl {
 
-    suspend fun fetchCuriosityPhotos(): Resource<PhotoResponseModel>
-    suspend fun fetchOpportunityPhotos(): Resource<PhotoResponseModel>
-    suspend fun fetchSpiritPhotos(): Resource<PhotoResponseModel>
 
 }

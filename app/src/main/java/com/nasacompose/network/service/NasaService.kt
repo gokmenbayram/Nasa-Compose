@@ -9,7 +9,7 @@ import retrofit2.http.Query
 interface NasaService {
 
     @GET("rovers/curiosity/photos")
-    suspend fun fetchCuriosityPhotos(
+    suspend fun fetchCuriosityPhot(
         @Query("sol") sol: Int = 1000,
         @Query("api_key") api_key: String = BuildConfig.API_KEY
     ): Response<PhotoResponseModel>
@@ -24,6 +24,14 @@ interface NasaService {
 
     @GET("rovers/spirit/photos")
     suspend fun fetchSpiritPhotos(
+        @Query("sol") sol: Int = 1000,
+        @Query("api_key") api_key: String = BuildConfig.API_KEY
+    ): Response<PhotoResponseModel>
+
+
+    @GET("rovers/curiosity/photos")
+    suspend fun fetchCuriosityPhotos(
+        @Query("page") page: Int,
         @Query("sol") sol: Int = 1000,
         @Query("api_key") api_key: String = BuildConfig.API_KEY
     ): Response<PhotoResponseModel>

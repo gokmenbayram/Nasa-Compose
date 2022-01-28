@@ -69,9 +69,7 @@ fun RoverListItem(
     }
 }
 
-
-
-@Composable
+/*@Composable
 fun RoverListComponent(curiosityList: List<PhotoDetailResponseModel>) {
     LazyColumn(contentPadding = PaddingValues(horizontal = 16.dp, vertical = 16.dp)) {
         items(
@@ -86,4 +84,4 @@ fun RoverListComponent(curiosityList: List<PhotoDetailResponseModel>) {
             }
         )
     }
-}
+}*/
