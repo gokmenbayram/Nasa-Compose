@@ -21,19 +21,25 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.nasacompose.R
+import com.nasacompose.data.model.local.FavoriteRover
 import com.nasacompose.data.model.response.RoverInfoDetailResponseModel
 import com.nasacompose.data.model.ui.RoverInfoUiState
+import com.nasacompose.presentation.ui.curiosity.curiosityViewModel
 import com.nasacompose.presentation.ui.custom.ErrorItem
 import com.nasacompose.presentation.ui.custom.LoadingItem
 import com.nasacompose.presentation.ui.custom.LoadingView
 import com.nasacompose.presentation.ui.custom.RoverListItem
 import com.nasacompose.presentation.viewmodel.opportunity.OpportunityViewModel
 
+lateinit var opportunityViewModel: OpportunityViewModel
+
 @Preview
 @Composable
 fun OpportunityScreen(
     viewModel: OpportunityViewModel = hiltViewModel()
 ) {
+
+    opportunityViewModel = viewModel
 
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -65,10 +71,12 @@ fun OpportunityRoverInfoList(opportunityRoverInfoList: LazyPagingItems<RoverInfo
             opportunityRoverInfoList[index]?.let {
                 RoverListItem(
                     RoverInfoUiState(
+                        roverId = it.id,
                         camera = it.camera,
                         imageUrl = it.img_src,
                         rover = it.rover
-                    )
+                    ),
+                    ::isFavorite
                 )
             }
         }
@@ -97,5 +105,14 @@ fun OpportunityRoverInfoList(opportunityRoverInfoList: LazyPagingItems<RoverInfo
                 }
             }
         }
+    }
+}
+
+private fun isFavorite(roverId: Int, isFavorite: Boolean, favoriteRover: FavoriteRover) {
+
+    if (isFavorite) {
+        //opportunityViewModel.insertFavoriteRover(favoriteRover)
+    } else {
+        //opportunityViewModel.deleteFavoriteRover(roverId)
     }
 }

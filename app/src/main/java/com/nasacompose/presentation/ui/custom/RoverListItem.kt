@@ -1,25 +1,29 @@
 package com.nasacompose.presentation.ui.custom
 
+import android.util.Log
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import com.nasacompose.R
+import com.nasacompose.data.model.local.FavoriteRover
 import com.nasacompose.data.model.ui.RoverCameraUiState
 import com.nasacompose.data.model.ui.RoverDetailUiState
 import com.nasacompose.data.model.ui.RoverInfoUiState
 
 @Composable
 fun RoverListItem(
-    curiosity: RoverInfoUiState
+    curiosity: RoverInfoUiState,
+    addToFavorite: (roverId: Int, isFavorite: Boolean, favoriteRover: FavoriteRover) -> Unit
 ) {
 
     val openDialog = remember { mutableStateOf(false)}
@@ -49,6 +53,17 @@ fun RoverListItem(
                         curiosity.rover.status
                     )
                 )
+                FavIcon(curiosity.ifFavorite) { isFavorite ->
+                    addToFavorite(curiosity.roverId, isFavorite, FavoriteRover(
+                        roverId = curiosity.roverId,
+                        cameraName = curiosity.camera.name,
+                        cameraFullName = curiosity.camera.full_name,
+                        status = curiosity.rover.status,
+                        landingDate = curiosity.rover.landing_date,
+                        launchDate = curiosity.rover.launch_date,
+                        imageUrl = curiosity.imageUrl
+                    ))
+                }
             }
         }
 
@@ -66,6 +81,32 @@ fun RoverListItem(
                     ))
             }
         }
+    }
+}
+
+@Composable
+fun FavIcon(isFavorite: Boolean, favorite: (isFavorite: Boolean) -> Unit) {
+
+    var isFavorite by remember {
+        mutableStateOf(isFavorite)
+    }
+
+    IconButton(
+        onClick = {
+            isFavorite = !isFavorite
+            favorite(isFavorite)
+        }
+    ) {
+        Image(
+            painter = painterResource(
+                id = if (isFavorite) {
+                    R.drawable.ic_fav
+                } else {
+                    R.drawable.ic_un_fav
+                }
+            ),
+            contentDescription = ""
+        )
     }
 }
 

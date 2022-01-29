@@ -6,7 +6,6 @@ import androidx.paging.PagingData
 import com.nasacompose.base.viewmodel.BaseViewModel
 import com.nasacompose.data.datasource.remote.MarsRemoteDataSource
 import com.nasacompose.data.model.response.RoverInfoDetailResponseModel
-import com.nasacompose.data.repository.CuriosityRoverRepository
 import com.nasacompose.data.repository.OpportunityRoverRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow

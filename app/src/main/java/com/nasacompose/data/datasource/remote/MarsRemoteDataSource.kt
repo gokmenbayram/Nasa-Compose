@@ -14,10 +14,14 @@ class MarsRemoteDataSource @Inject constructor(
     }
 
     override suspend fun fetchOpportunityInfo(page: Int): Response<RoverInfoResponseModel> {
-        return remote.fetchOpportunityPhotos(page)
+        return remote.fetchOpportunityInfo(page)
     }
 
     override suspend fun fetchSpiritInfo(page: Int): Response<RoverInfoResponseModel> {
-        return remote.fetchSpiritPhotos(page)
+        return remote.fetchSpiritInfo(page)
+    }
+
+    override suspend fun filterRover(roverName: String, camera: String, page: Int): Response<RoverInfoResponseModel> {
+        return remote.filterRover(roverName, camera, page)
     }
 }

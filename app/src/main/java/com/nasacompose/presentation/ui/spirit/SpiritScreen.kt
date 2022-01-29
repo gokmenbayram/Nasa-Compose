@@ -1,7 +1,7 @@
 package com.nasacompose.presentation.ui.spirit
 
+import android.util.Log
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CornerSize
@@ -20,19 +20,25 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.rememberImagePainter
 import com.nasacompose.R
+import com.nasacompose.data.model.local.FavoriteRover
 import com.nasacompose.data.model.response.RoverInfoDetailResponseModel
 import com.nasacompose.data.model.ui.RoverInfoUiState
+import com.nasacompose.presentation.ui.curiosity.curiosityViewModel
 import com.nasacompose.presentation.ui.custom.ErrorItem
 import com.nasacompose.presentation.ui.custom.LoadingItem
 import com.nasacompose.presentation.ui.custom.LoadingView
 import com.nasacompose.presentation.ui.custom.RoverListItem
 import com.nasacompose.presentation.viewmodel.spirit.SpiritViewModel
 
+lateinit var spiritViewModel: SpiritViewModel
+
 @Preview
 @Composable
 fun SpiritScreen(
     viewModel: SpiritViewModel = hiltViewModel()
 ) {
+
+    spiritViewModel = viewModel
 
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -65,10 +71,12 @@ fun SpiritRoverInfoList(spiritRoverInfoList: LazyPagingItems<RoverInfoDetailResp
             spiritRoverInfoList[index]?.let {
                 RoverListItem(
                     RoverInfoUiState(
+                        roverId = it.id,
                         camera = it.camera,
                         imageUrl = it.img_src,
                         rover = it.rover
-                    )
+                    ),
+                    ::isFavorite
                 )
             }
         }
@@ -98,5 +106,14 @@ fun SpiritRoverInfoList(spiritRoverInfoList: LazyPagingItems<RoverInfoDetailResp
                 }
             }
         }
+    }
+}
+
+private fun isFavorite(roverId: Int, isFavorite: Boolean, favoriteRover: FavoriteRover) {
+
+    if (isFavorite) {
+        //spiritViewModel.insertFavoriteRover(favoriteRover)
+    } else {
+        //spiritViewModel.deleteFavoriteRover(roverId)
     }
 }

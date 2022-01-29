@@ -2,8 +2,8 @@ package com.nasacompose.presentation.ui.custom
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import coil.compose.rememberImagePainter
 import com.nasacompose.data.model.ui.RoverCamera
 import com.nasacompose.data.model.ui.RoverCameraUiState
@@ -95,27 +96,66 @@ fun FilterDialog(
     cameraSelected: (String) -> Unit
 ) {
 
-    var selected by remember { mutableStateOf(RoverCamera.FHAZ.filterName) }
+    val filterOption = listOf(RoverCamera.FHAZ.filterName, RoverCamera.RHAZ.filterName)
+
+    var (selectedFilterName, onOptionSelected) = remember { mutableStateOf(filterOption[0]) }
 
     Card(
         shape = RoundedCornerShape(10.dp),
-        modifier = Modifier.padding(10.dp,5.dp,10.dp,10.dp).height(75.dp),
-        elevation = 8.dp
+        modifier = Modifier
+            .padding(10.dp, 5.dp, 10.dp, 10.dp)
+            .wrapContentHeight(),
+        elevation = 8.dp,
+
     ) {
-        Row(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color.White)
+                .wrapContentHeight()
+                .padding(bottom = 5.dp),
+             horizontalAlignment = Alignment.CenterHorizontally
+
         ) {
-            RadioButton(selected = selected == RoverCamera.FHAZ.filterName, onClick = {
-                cameraSelected(selected)
-            })
-            Text(
-                text = RoverCamera.FHAZ.filterName,
-                modifier = Modifier.clickable(onClick = {
-                    selected = RoverCamera.FHAZ.filterName
-                }).padding(start = 4.dp, top = 2.dp)
-            )
+            Column {
+                filterOption.forEach { text ->
+                    Row(
+                        Modifier
+                            .fillMaxWidth()
+                            .selectable(
+                                selected = (text == selectedFilterName),
+                                onClick = { onOptionSelected(text) }
+                            )
+                            .padding(horizontal = 16.dp)
+                    ) {
+                        RadioButton(
+                            selected = (text == selectedFilterName),
+                            modifier = Modifier.padding(all = Dp(value = 8F)),
+                            onClick = {
+                                onOptionSelected(text)
+                            }
+                        )
+                        Text(
+                            text = text,
+                            modifier = Modifier.padding(all = Dp(value = 8F))
+                        )
+                    }
+                }
+            }
+            OutlinedButton(
+                onClick = {
+                    cameraSelected(selectedFilterName)
+                    openFilterDialog.value = false
+                }) {
+                Text("Filtrele",
+                color = Gray)
+            }
         }
     }
 }
+
+
+
+
+
+
+

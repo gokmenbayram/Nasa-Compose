@@ -100,4 +100,7 @@ dependencies {
     implementation composeDependencies.coil
     implementation composeDependencies.live_data
     implementation composeDependencies.navigation_compose
+
+    implementation daoDependencies.roomKtx
+    kapt daoDependencies.roomCompiler
 }

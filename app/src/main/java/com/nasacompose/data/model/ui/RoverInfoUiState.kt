@@ -4,7 +4,9 @@ import com.nasacompose.data.model.response.CameraResponseModel
 import com.nasacompose.data.model.response.RoverResponseModel
 
 data class RoverInfoUiState(
+    val roverId: Int,
     val camera: CameraResponseModel,
     val imageUrl : String,
-    val rover: RoverResponseModel
+    val rover: RoverResponseModel,
+    val ifFavorite: Boolean = false
 )

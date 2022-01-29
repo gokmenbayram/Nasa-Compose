@@ -56,4 +56,12 @@ ext {
             live_data : "androidx.compose.runtime:runtime-livedata:$liveDataVersion",
             navigation_compose : "androidx.navigation:navigation-compose:$navigationComposeVersion"
     ]
+
+    // ----- DAO -------
+    daoVersion = "2.4.1"
+    daoDependencies = [
+            roomKtx : "androidx.room:room-ktx:$daoVersion",
+            roomCompiler : "androidx.room:room-compiler:$daoVersion"
+    ]
+
 }

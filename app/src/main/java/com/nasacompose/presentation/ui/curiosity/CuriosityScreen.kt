@@ -1,6 +1,5 @@
 package com.nasacompose.presentation.ui.curiosity
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -21,11 +20,13 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.nasacompose.R
+import com.nasacompose.data.model.local.FavoriteRover
 import com.nasacompose.data.model.response.RoverInfoDetailResponseModel
-import com.nasacompose.data.model.ui.RoverCameraUiState
 import com.nasacompose.data.model.ui.RoverInfoUiState
 import com.nasacompose.presentation.ui.custom.*
 import com.nasacompose.presentation.viewmodel.curiosity.CuriosityViewModel
+
+lateinit var curiosityViewModel: CuriosityViewModel
 
 @Preview
 @Composable
@@ -33,19 +34,22 @@ fun CuriosityScreen(
     viewModel: CuriosityViewModel = hiltViewModel()
 ) {
 
+    curiosityViewModel = viewModel
+
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.End
     ) {
-        CuriosityRoverFilter()
+        CuriosityRoverFilter(viewModel)
         CuriosityRoverInfoList(curiosityRoverInfoList = viewModel.curiosityRoverInfoList.collectAsLazyPagingItems())
     }
 }
 
 @Composable
-fun CuriosityRoverFilter() {
+fun CuriosityRoverFilter(viewModel: CuriosityViewModel) {
 
     var openFilterDialog = remember { mutableStateOf(false)}
+    var filterSelected = remember { mutableStateOf(false)}
 
     Image(
         painter = painterResource(R.drawable.ic_filter),
@@ -64,10 +68,15 @@ fun CuriosityRoverFilter() {
         Dialog(onDismissRequest = { openFilterDialog.value = false}) {
             FilterDialog(
                 openFilterDialog = openFilterDialog,
-                cameraSelected = {
-                    Log.i("Selekted", "$it")
+                cameraSelected = { camera ->
+                    filterSelected.value = true
                 })
         }
+    }
+
+    if (filterSelected.value) {
+        CuriosityRoverInfoList(curiosityRoverInfoList = viewModel.curiosityRoverInfoList.collectAsLazyPagingItems())
+
     }
 }
 
@@ -78,11 +87,13 @@ fun CuriosityRoverInfoList(curiosityRoverInfoList: LazyPagingItems<RoverInfoDeta
             curiosityRoverInfoList[index]?.let {
                 RoverListItem(
                     RoverInfoUiState(
+                        roverId = it.id,
                         camera = it.camera,
                         imageUrl = it.img_src,
                         rover = it.rover
-                    )
-                )
+                    ),
+                    ::isFavorite
+                 )
             }
         }
 
@@ -110,5 +121,15 @@ fun CuriosityRoverInfoList(curiosityRoverInfoList: LazyPagingItems<RoverInfoDeta
                 }
             }
         }
+    }
+}
+
+
+private fun isFavorite(roverId: Int, isFavorite: Boolean, favoriteRover: FavoriteRover) {
+
+    if (isFavorite) {
+        curiosityViewModel.insertFavoriteRover(favoriteRover)
+    } else {
+        curiosityViewModel.deleteFavoriteRover(roverId)
     }
 }
