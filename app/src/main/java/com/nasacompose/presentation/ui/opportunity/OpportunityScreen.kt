@@ -24,7 +24,6 @@ import com.nasacompose.R
 import com.nasacompose.data.model.local.FavoriteRover
 import com.nasacompose.data.model.response.RoverInfoDetailResponseModel
 import com.nasacompose.data.model.ui.RoverInfoUiState
-import com.nasacompose.presentation.ui.curiosity.curiosityViewModel
 import com.nasacompose.presentation.ui.custom.ErrorItem
 import com.nasacompose.presentation.ui.custom.LoadingItem
 import com.nasacompose.presentation.ui.custom.LoadingView
@@ -45,24 +44,9 @@ fun OpportunityScreen(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.End
     ) {
-        OpportunityRoverFilter()
         OpportunityRoverInfoList(opportunityRoverInfoList = viewModel.opportunityRoverInfoList.collectAsLazyPagingItems())
     }
 }
-
-@Composable
-fun OpportunityRoverFilter() {
-    Image(
-        painter = painterResource(R.drawable.ic_filter),
-        contentDescription = null,
-        contentScale = ContentScale.Crop,
-        modifier = Modifier
-            .size(25.dp)
-            .padding(top = 5.dp)
-            .clip(RoundedCornerShape(corner = CornerSize(13.dp)))
-    )
-}
-
 
 @Composable
 fun OpportunityRoverInfoList(opportunityRoverInfoList: LazyPagingItems<RoverInfoDetailResponseModel>) {

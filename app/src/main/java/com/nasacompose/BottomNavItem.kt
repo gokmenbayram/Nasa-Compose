@@ -8,6 +8,6 @@ sealed class BottomNavItem(
     object Curiosity: BottomNavItem("Curiosity", R.drawable.ic_curiosity,"curiosity")
     object Opportunity: BottomNavItem("Opportunity", R.drawable.ic_opportunity,"opportunity")
     object Spirit: BottomNavItem("Spirit", R.drawable.ic_spirit,"spirit")
-    object Favorite: BottomNavItem("Favorite", R.drawable.ic_fav,"favorite")
+    //object Favorite: BottomNavItem("Favorite", R.drawable.ic_fav,"favorite")
 
 }

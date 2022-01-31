@@ -20,10 +20,10 @@ class CuriosityRoverRepository @Inject constructor(
 
             val response = remote.fetchCuriosityInfo(nextPage)
 
-            val roverPhotoList = response.body()?.photos ?: emptyList()
+            val roverInfoDetail = response.body()?.photos ?: emptyList()
 
             LoadResult.Page(
-                data = roverPhotoList,
+                data = roverInfoDetail,
                 prevKey = if (nextPage == 1) null else nextPage - 1,
                 nextKey = nextPage.plus(1)
             )

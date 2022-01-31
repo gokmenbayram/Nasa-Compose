@@ -48,7 +48,7 @@ fun BottomNavigation(navController: NavController) {
         BottomNavItem.Curiosity,
         BottomNavItem.Opportunity,
         BottomNavItem.Spirit,
-        BottomNavItem.Favorite
+       // BottomNavItem.Favorite
     )
 
     BottomNavigation(
@@ -103,8 +103,8 @@ fun NavigationGraph(navHostController: NavHostController) {
         composable(BottomNavItem.Spirit.screen_route) {
             SpiritScreen()
         }
-        composable(BottomNavItem.Favorite.screen_route) {
+        /*composable(BottomNavItem.Favorite.screen_route) {
             FavoriteScreen()
-        }
+        }*/
     }
 }

@@ -8,5 +8,5 @@ data class RoverInfoUiState(
     val camera: CameraResponseModel,
     val imageUrl : String,
     val rover: RoverResponseModel,
-    val ifFavorite: Boolean = false
+    val isFavorite: Boolean = false
 )

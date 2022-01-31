@@ -53,7 +53,7 @@ fun RoverListItem(
                         curiosity.rover.status
                     )
                 )
-                FavIcon(curiosity.ifFavorite) { isFavorite ->
+                /*FavIcon(curiosity.isFavorite) { isFavorite ->
                     addToFavorite(curiosity.roverId, isFavorite, FavoriteRover(
                         roverId = curiosity.roverId,
                         cameraName = curiosity.camera.name,
@@ -63,7 +63,7 @@ fun RoverListItem(
                         launchDate = curiosity.rover.launch_date,
                         imageUrl = curiosity.imageUrl
                     ))
-                }
+                }*/
             }
         }
 
