@@ -1,0 +1,67 @@
+
+ext {
+
+    // ----- RETROFIT -------
+    retrofitVersion = "2.9.0"
+    retrofitDependencies = [
+            retrofit : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            retrofit_conv_gson : "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+    ]
+
+    // ----- NAVIGATION COMPOSE -------
+
+
+    // ----- COROUTINE -------
+    coroutineVersion = "1.5.2"
+    coroutineDependencies = [
+            coroutine_core : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion",
+            coroutine_android : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion"
+    ]
+
+    // ----- VIEW MODEL -----
+    viewModelVersion = "2.3.1"
+    viewModelDependency = "androidx.lifecycle:lifecycle-viewmodel-ktx:${viewModelVersion}"
+
+
+    // ----- GLIDE -----
+    glideVersion = "4.12.0"
+    glideDependencies = [
+            glide : "com.github.bumptech.glide:glide:${glideVersion}",
+            glide_annotation : "com.github.bumptech.glide:compiler:${glideVersion}"
+    ]
+
+    // ----- HILT -----
+    hiltVersion = "2.38.1"
+    hiltDependencies = [
+            hilt : "com.google.dagger:hilt-android:${hiltVersion}",
+            hilt_compiler : "com.google.dagger:hilt-compiler:${hiltVersion}",
+    ]
+
+
+    // ----- GSON -------
+    gsonVersion = "2.8.9"
+    gsonDependency = "com.google.code.gson:gson:${gsonVersion}"
+
+    // ----- COMPOSE -------
+    coilVersion = "1.4.0"
+    pagingVersion = "1.0.0-alpha14"
+    liveDataVersion = "1.0.5"
+    navigationComposeVersion = "2.4.0-beta02"
+    hiltNavComposeVersion = "1.0.0-beta01"
+
+    composeDependencies = [
+            paging : "androidx.paging:paging-compose:$pagingVersion",
+            coil : "io.coil-kt:coil-compose:$coilVersion",
+            live_data : "androidx.compose.runtime:runtime-livedata:$liveDataVersion",
+            navigation_compose : "androidx.navigation:navigation-compose:$navigationComposeVersion",
+            hilt_navigation_compose : "androidx.hilt:hilt-navigation-compose:${hiltNavComposeVersion}"
+    ]
+
+    // ----- DAO -------
+    daoVersion = "2.4.1"
+    daoDependencies = [
+            room_ktx : "androidx.room:room-ktx:$daoVersion",
+            room_compiler : "androidx.room:room-compiler:$daoVersion"
+    ]
+
+}

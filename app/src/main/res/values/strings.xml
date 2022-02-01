@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">NasaCompose</string>
+    <string name="app_name">Mars</string>
+    <string name="title_activity_splash">SplashActivity</string>
 </resources>

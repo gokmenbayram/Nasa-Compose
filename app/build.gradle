@@ -1,7 +1,11 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
+
+apply from: 'dependencies.gradle'
 
 android {
     compileSdk 31
@@ -20,7 +24,17 @@ android {
     }
 
     buildTypes {
+
+        debug {
+            buildConfigField "String", "API_KEY", '"F9pnzGGtTX49Rhu0fMxOUyUsEedBWRISdQAEoDez"'
+            buildConfigField "String", "BASE_API_URL", '"https://api.nasa.gov/mars-photos/api/v1/"'
+        }
+
         release {
+
+            buildConfigField "String", "API_KEY", '"F9pnzGGtTX49Rhu0fMxOUyUsEedBWRISdQAEoDez"'
+            buildConfigField "String", "BASE_API_URL", '"https://api.nasa.gov/mars-photos/api/v1/"'
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -62,4 +76,31 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+
+
+    implementation retrofitDependencies.retrofit
+    implementation retrofitDependencies.retrofit_conv_gson
+
+
+    implementation coroutineDependencies.coroutine_core
+    implementation coroutineDependencies.coroutine_android
+
+    implementation viewModelDependency
+
+    implementation glideDependencies.glide
+    implementation glideDependencies.glide_annotation
+
+    implementation hiltDependencies.hilt
+    implementation composeDependencies.hilt_navigation_compose
+    kapt hiltDependencies.hilt_compiler
+
+    implementation gsonDependency
+
+    implementation composeDependencies.paging
+    implementation composeDependencies.coil
+    implementation composeDependencies.live_data
+    implementation composeDependencies.navigation_compose
+
+    implementation daoDependencies.room_ktx
+    kapt daoDependencies.room_compiler
 }
