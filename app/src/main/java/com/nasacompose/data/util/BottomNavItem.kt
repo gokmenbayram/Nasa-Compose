@@ -1,4 +1,6 @@
-package com.nasacompose
+package com.nasacompose.data.util
+
+import com.nasacompose.R
 
 sealed class BottomNavItem(
     var title: String,
@@ -9,5 +11,4 @@ sealed class BottomNavItem(
     object Opportunity: BottomNavItem("Opportunity", R.drawable.ic_opportunity,"opportunity")
     object Spirit: BottomNavItem("Spirit", R.drawable.ic_spirit,"spirit")
     //object Favorite: BottomNavItem("Favorite", R.drawable.ic_fav,"favorite")
-
 }

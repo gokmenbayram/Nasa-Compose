@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.nasacompose.presentation.ui.theme.Light
 
 @Composable
 fun ErrorItem(
@@ -51,6 +52,7 @@ fun LoadingView(
 @Composable
 fun LoadingItem() {
     CircularProgressIndicator(
+        color = Light,
         modifier = Modifier.fillMaxWidth()
             .padding(16.dp)
             .wrapContentWidth(Alignment.CenterHorizontally)

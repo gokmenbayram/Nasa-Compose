@@ -1,7 +1,6 @@
 package com.nasacompose.presentation.ui.main
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
@@ -19,9 +18,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.nasacompose.BottomNavItem
+import com.nasacompose.data.util.BottomNavItem
 import com.nasacompose.R
-import com.nasacompose.presentation.ui.favorite.FavoriteScreen
 import androidx.compose.material.BottomNavigation
 import androidx.compose.ui.Modifier
 import com.nasacompose.presentation.ui.curiosity.CuriosityScreen
@@ -52,7 +50,7 @@ fun BottomNavigation(navController: NavController) {
     )
 
     BottomNavigation(
-        backgroundColor = colorResource(id = R.color.gray),
+        backgroundColor = colorResource(id = R.color.light),
         contentColor = Color.Black
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()

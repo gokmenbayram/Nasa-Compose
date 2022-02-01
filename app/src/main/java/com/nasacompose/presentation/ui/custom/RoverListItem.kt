@@ -1,6 +1,5 @@
 package com.nasacompose.presentation.ui.custom
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -34,7 +33,7 @@ fun RoverListItem(
     ) {
         Card(
             modifier = Modifier
-                .padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
+                .padding(start = 8.dp, end = 8.dp, bottom = 8.dp, top = 2.dp)
                 .fillMaxWidth()
                 .clickable {
                     openDialog.value = true
@@ -53,23 +52,12 @@ fun RoverListItem(
                         curiosity.rover.status
                     )
                 )
-                /*FavIcon(curiosity.isFavorite) { isFavorite ->
-                    addToFavorite(curiosity.roverId, isFavorite, FavoriteRover(
-                        roverId = curiosity.roverId,
-                        cameraName = curiosity.camera.name,
-                        cameraFullName = curiosity.camera.full_name,
-                        status = curiosity.rover.status,
-                        landingDate = curiosity.rover.landing_date,
-                        launchDate = curiosity.rover.launch_date,
-                        imageUrl = curiosity.imageUrl
-                    ))
-                }*/
             }
         }
 
         if (openDialog.value) {
             Dialog(onDismissRequest = { openDialog.value = false}) {
-                CustomDialogUI(
+                RoverDetailDialog(
                     openDialogCustom = openDialog,
                     camera = RoverCameraUiState(
                         curiosity.camera.id,

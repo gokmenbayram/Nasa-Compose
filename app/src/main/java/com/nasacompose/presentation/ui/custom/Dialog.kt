@@ -3,7 +3,6 @@ package com.nasacompose.presentation.ui.custom
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -17,14 +16,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
 import coil.compose.rememberImagePainter
-import com.nasacompose.data.model.ui.RoverCamera
 import com.nasacompose.data.model.ui.RoverCameraUiState
-import com.nasacompose.presentation.ui.theme.Gray
+import com.nasacompose.presentation.ui.theme.Light
 
 @Composable
-fun CustomDialogUI(modifier: Modifier = Modifier, openDialogCustom: MutableState<Boolean>, camera: RoverCameraUiState){
+fun RoverDetailDialog(modifier: Modifier = Modifier, openDialogCustom: MutableState<Boolean>, camera: RoverCameraUiState){
     Card(
         shape = RoundedCornerShape(10.dp),
         modifier = Modifier.padding(10.dp,5.dp,10.dp,10.dp),
@@ -71,7 +68,7 @@ fun CustomDialogUI(modifier: Modifier = Modifier, openDialogCustom: MutableState
                 Modifier
                     .fillMaxWidth()
                     .padding(top = 10.dp)
-                    .background(Gray),
+                    .background(Light),
                 horizontalArrangement = Arrangement.SpaceAround) {
                 TextButton(onClick = {
                     openDialogCustom.value = false
@@ -90,7 +87,7 @@ fun CustomDialogUI(modifier: Modifier = Modifier, openDialogCustom: MutableState
 
 
 
-@Composable
+/*@Composable
 fun FilterDialog(
     openFilterDialog: MutableState<Boolean>,
     cameraSelected: (String) -> Unit
@@ -151,7 +148,7 @@ fun FilterDialog(
             }
         }
     }
-}
+}*/
 
 
 

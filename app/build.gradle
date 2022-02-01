@@ -79,11 +79,11 @@ dependencies {
 
 
     implementation retrofitDependencies.retrofit
-    implementation retrofitDependencies.retrofitConvGson
+    implementation retrofitDependencies.retrofit_conv_gson
 
 
-    implementation coroutineDependencies.coroutineCore
-    implementation coroutineDependencies.coroutineAndroid
+    implementation coroutineDependencies.coroutine_core
+    implementation coroutineDependencies.coroutine_android
 
     implementation viewModelDependency
 
@@ -91,7 +91,7 @@ dependencies {
     implementation glideDependencies.glide_annotation
 
     implementation hiltDependencies.hilt
-    implementation hiltDependencies.hilt_navigation_compose
+    implementation composeDependencies.hilt_navigation_compose
     kapt hiltDependencies.hilt_compiler
 
     implementation gsonDependency
@@ -101,6 +101,6 @@ dependencies {
     implementation composeDependencies.live_data
     implementation composeDependencies.navigation_compose
 
-    implementation daoDependencies.roomKtx
-    kapt daoDependencies.roomCompiler
+    implementation daoDependencies.room_ktx
+    kapt daoDependencies.room_compiler
 }
